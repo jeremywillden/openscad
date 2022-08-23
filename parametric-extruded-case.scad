@@ -1,14 +1,14 @@
-wall_thickness = 2.5;
-edge_radius = 5;
-box_height = 30;
-box_width = 58.5;
-box_length = 100;
-corner_circle_div = 64;
-slot_depth = 3;
-slot_support_thickness = 2.5;
-screw_inner_dia = 2;
-screw_outer_dia = 4;
-automatic_screw_placement = true;
+wall_thickness = 2.5; // case wall thickness
+edge_radius = 5; // rounded corner radius
+box_height = 30; // height of the box when lying flat on the table
+box_width = 58.5; // width of the box
+box_length = 68.58; // distance along the axis of the "extrusion"
+corner_circle_div = 64; // how many segments in the rounded edges
+slot_depth = 3; // depth of the circuit board slots in mm
+slot_support_thickness = 2.5; // circuit board guide supports above and below the board
+screw_inner_dia = 2; // inner diameter hole for screws
+screw_outer_dia = 4; // outer diameter of the screw support rods
+automatic_screw_placement = true; // if false, screw_hpos_and_ypos will be used
 
 slot_heights_and_ypos = [
     [1.8, -4],
