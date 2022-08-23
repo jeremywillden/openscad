@@ -1,20 +1,21 @@
-wall_thickness = 3;
+wall_thickness = 2.5;
 edge_radius = 5;
 box_height = 30;
-box_width = 50;
+box_width = 58.5;
 box_length = 100;
 corner_circle_div = 64;
 slot_depth = 3;
 slot_support_thickness = 2.5;
 screw_inner_dia = 2;
 screw_outer_dia = 4;
+automatic_screw_placement = true;
 
 slot_heights_and_ypos = [
-    [1.8, -5], [1.8, 5]
+    [1.8, -4],
 ];
 
 screw_hpos_and_ypos = [
-    [-20, 10], [20, 10], [-20, -10], [20, -10]
+    [-20, 10], [20, 10], [-20, -10], [20, -10],
 ];
 
 module roundedRectangle(fullwidth,fullheight,zoffset,cornerradius) {
@@ -52,7 +53,14 @@ module roundedBox(fullwidth,fullheight,zoffset,cornerradius) {
 module multiRods(rod_dia) {
     for (b = [ 0 : len(screw_hpos_and_ypos) - 1]) {
         screw = screw_hpos_and_ypos[b];
-        translate([screw[0],screw[1]]) cylinder(h = box_length, r1 = rod_dia, r2 = rod_dia, center = true);
+        if (automatic_screw_placement) {
+            translate([(box_width/2-2*wall_thickness),(box_height/2-2*wall_thickness)]) cylinder(h = box_length, r1 = rod_dia, r2 = rod_dia, center = true);
+            translate([-(box_width/2-2*wall_thickness),(box_height/2-2*wall_thickness)]) cylinder(h = box_length, r1 = rod_dia, r2 = rod_dia, center = true);
+            translate([(box_width/2-2*wall_thickness),-(box_height/2-2*wall_thickness)]) cylinder(h = box_length, r1 = rod_dia, r2 = rod_dia, center = true);
+            translate([-(box_width/2-2*wall_thickness),-(box_height/2-2*wall_thickness)]) cylinder(h = box_length, r1 = rod_dia, r2 = rod_dia, center = true);
+        } else {
+            translate([screw[0],screw[1]]) cylinder(h = box_length, r1 = rod_dia, r2 = rod_dia, center = true);
+        }
     }
 }
 
